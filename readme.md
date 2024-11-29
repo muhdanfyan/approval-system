@@ -73,147 +73,21 @@ DB_PASSWORD=
 **Gunakan Form Request Validation**
 
 * Aplikasi ini menggunakan Form Request Validation untuk memvalidasi input pengguna.
-* Contoh:
-```php
-// app/Http/Requests/ExpenseRequest.php
-
-namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class ExpenseRequest extends FormRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'amount' => 'required|numeric',
-            'description' => 'required|string',
-        ];
-    }
-}
-```
 
 **Menggunakan file class request terpisah**
 
 * Aplikasi ini menggunakan file class request terpisah untuk memisahkan logika validasi dari logika kontrol.
-* Contoh:
-```php
-// app/Http/Controllers/ExpenseController.php
-
-namespace App\Http\Controllers;
-
-use App\Http\Requests\ExpenseRequest;
-use App\Repositories\ExpenseRepository;
-
-class ExpenseController extends Controller
-{
-    /**
-     * Create a new expense.
-     *
-     * @param  \App\Http\Requests\ExpenseRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ExpenseRequest $request)
-    {
-        // ...
-    }
-}
-```
 
 **Controller**
 
 * Aplikasi ini menggunakan controller untuk mengatur logika kontrol.
-* Contoh:
-```php
-// app/Http/Controllers/ExpenseController.php
-
-namespace App\Http\Controllers;
-
-use App\Http\Requests\ExpenseRequest;
-use App\Repositories\ExpenseRepository;
-
-class ExpenseController extends Controller
-{
-    /**
-     * Create a new expense.
-     *
-     * @param  \App\Http\Requests\ExpenseRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ExpenseRequest $request)
-    {
-        // ...
-    }
-}
-```
 
 **Alur logika kode diletakkan diluar file class Controller**
 
 * Aplikasi ini menggunakan repository pattern untuk memisahkan logika bisnis dari logika kontrol.
-* Contoh:
-```php
-// app/Repositories/ExpenseRepository.php
-
-namespace App\Repositories;
-
-use App\Models\Expense;
-
-class ExpenseRepository
-{
-    /**
-     * Create a new expense.
-     *
-     * @param  array  $data
-     * @return \App\Models\Expense
-     */
-    public function create(array $data)
-    {
-        // ...
-    }
-}
-```
-
 **Menggunakan Repository Pattern**
 
 * Aplikasi ini menggunakan repository pattern untuk memisahkan logika bisnis dari logika kontrol.
-* Contoh:
-```php
-// app/Repositories/ExpenseRepository.php
-
-namespace App\Repositories;
-
-use App\Models\Expense;
-
-class ExpenseRepository
-{
-    /**
-     * Create a new expense.
-     *
-     * @param  array  $data
-     * @return \App\Models\Expense
-     */
-    public function create(array $data)
-    {
-        // ...
-    }
-}
-```
-
 **Dokumentasi**
 
 * Aplikasi ini menggunakan dokumentasi swagger untuk memudahkan penggunaan API.
@@ -239,167 +113,18 @@ Route::get('/expenses', 'ExpenseController@index')->name('expenses.index');
 * Aplikasi ini menggunakan dokumentasi swagger untuk memudahkan penggunaan API.
 * Anda bisa mengakses Swagger UI di `http://localhost:8000/api/docs`
 * Contoh:
-```php
-// routes/api.php
 
-Route::get('/expenses', 'ExpenseController@index')->name('expenses.index');
-```
 
 **Testing**
 
 * Aplikasi ini menggunakan PHPUnit untuk melakukan testing.
 * Aplikasi ini melakukan testing untuk setiap endpoint.
 * Contoh:
-```php
-// tests/Feature/ExpenseTest.php
-
-namespace Tests\Feature;
-
-use App\Models\Expense;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-
-class ExpenseTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /**
-     * Test the index endpoint.
-     *
-     * @return void
-     */
-    public function testIndexEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the store endpoint.
-     *
-     * @return void
-     */
-    public function testStoreEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the show endpoint.
-     *
-     * @return void
-     */
-    public function testShowEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the update endpoint.
-     *
-     * @return void
-     */
-    public function testUpdateEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the destroy endpoint.
-     *
-     * @return void
-     */
-    public function testDestroyEndpoint()
-    {
-        // ...
-    }
-}
-```
 
 **Setiap endpoint di-test untuk memastikan bisa berjalan dengan baik.**
 
 * Aplikasi ini melakukan testing untuk setiap endpoint.
 * Aplikasi ini melakukan testing untuk setiap kondisi, mulai dari validasi input hingga alur didalamnya.
-* Contoh:
-```php
-// tests/Feature/ExpenseTest.php
-
-namespace Tests\Feature;
-
-use App\Models\Expense;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-
-class ExpenseTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /**
-     * Test the index endpoint.
-     *
-     * @return void
-     */
-    public function testIndexEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the store endpoint.
-     *
-     * @return void
-     */
-    public function testStoreEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the show endpoint.
-     *
-     * @return void
-     */
-    public function testShowEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the update endpoint.
-     *
-     * @return void
-     */
-    public function testUpdateEndpoint()
-    {
-        // ...
-    }
-
-    /**
-     * Test the destroy endpoint.
-     *
-     * @return void
-     */
-    public function testDestroyEndpoint()
-    {
-        // ...
-    }
-}
-```
 
 **Tidak hanya test response code saja, tapi berbagai kondisi di-test. Mulai dari test validasinya, serta test alur didalamnya. Semakin lengkap semakin bagus.**
 
-**Readme**
-
-* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang aplikasi.
-* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara menginstal aplikasi.
-* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara menggunakan aplikasi.
-* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara melakukan testing
-
-**Lisensi**
-
-Aplikasi ini dirilis di bawah lisensi MIT. Anda bebas menggunakan, memodifikasi, dan mendistribusikan aplikasi ini sesuai dengan ketentuan lisensi.
-
-**Kontak**
-
-Jika Anda memiliki pertanyaan atau masalah dengan aplikasi ini, silakan hubungi kami di [alamat email Anda].
