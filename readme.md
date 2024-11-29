@@ -1,6 +1,5 @@
 Berikut adalah template **README.md** yang sesuai dengan spesifikasi proyek:  
 
-```markdown
 # Expense Approval System API  
 
 Sistem REST API untuk persetujuan pengeluaran menggunakan Laravel 8. API ini mendukung manajemen approver, tahap persetujuan, dan pengeluaran dengan proses validasi bertahap. Proyek ini menggunakan Swagger untuk dokumentasi, Eloquent untuk transaksi basis data, serta PHPUnit untuk pengujian otomatis.  
