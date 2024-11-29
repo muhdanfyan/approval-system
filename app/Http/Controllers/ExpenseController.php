@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ExpenseService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ExpenseController extends Controller
 {
@@ -49,7 +50,15 @@ class ExpenseController extends Controller
     // Menambahkan Pengeluaran
     public function store(Request $request)
     {
-        return $this->expenseService->createExpense($request);
+        $validated = $request->validate([
+            'amount' => 'required|numeric|min:1',
+        ]);
+
+        $expense = $this->expenseService->createExpense($validated);
+
+        return response()->json([
+            'message' => 'Expense created successfully',
+        ]);
     }
     /**
      * @OA\Patch(
@@ -91,9 +100,14 @@ class ExpenseController extends Controller
     // Menyetuju pengeluaran
     public function approve(Request $request, $id)
     {
-        return $this->expenseService->approveExpense($request, $id);
+        // Proses data yang diterima
+        $expense = Expense::find($id);
+        $expense->status = 'approved';
+        $expense->save();
+
+        // Mengembalikan respons dengan status kode 200
+        return response()->json(['message' => 'Expense approved'], 200);
     }
-    
     /**
      * @OA\Get(
      *     path="/api/expenses/{id}",

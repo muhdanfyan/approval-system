@@ -1,64 +1,405 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+**Aplikasi Pengelolaan Pengeluaran**
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi ini dirancang untuk membantu mengelola pengeluaran dalam sebuah organisasi. Aplikasi ini memungkinkan pengguna untuk membuat, mengedit, dan menghapus pengeluaran, serta menyetujui atau menolak pengeluaran yang diajukan oleh pengguna lain.
 
-## About Laravel
+**Instalasi**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Clone repository ini ke dalam direktori Anda:
+```bash
+git clone https://github.com/muhdanfyan/approval-system.git
+```
+2. Jalankan perintah berikut untuk menginstal dependensi:
+```bash
+composer install
+```
+3. Jalankan perintah berikut untuk membuat tabel database:
+```bash
+php artisan migrate
+```
+4. Jalankan perintah berikut untuk membuat data awal:
+```bash
+php artisan db:seed
+```
+5. Jalankan perintah berikut untuk menjalankan aplikasi:
+```bash
+php artisan serve
+```
+6. Buka aplikasi di browser Anda dengan alamat `http://localhost:8000`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Konfigurasi**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Buat file `.env` di direktori root aplikasi dan isi dengan konfigurasi database Anda:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=expense_management
+DB_USERNAME=root
+DB_PASSWORD=
+```
+* Atur konfigurasi aplikasi di file `config/app.php` jika perlu.
 
-## Learning Laravel
+**Penggunaan**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Masuk ke aplikasi dengan menggunakan akun yang sudah ada atau buat akun baru.
+2. Anda bisa menggunakan aplikasi untuk membuat, mengedit, dan menghapus pengeluaran, serta menyetujui atau menolak pengeluaran yang diajukan oleh pengguna lain.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+**Topik**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Pengelolaan pengeluaran
+* Validasi endpoint
+* Penggunaan Form Request Validation
+* Penggunaan Repository Pattern
+* Dokumentasi dengan Swagger
+* Testing dengan PHPUnit
 
-### Premium Partners
+**Requirement**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+* PHP 7.4 atau lebih tinggi
+* Laravel 8.x atau lebih tinggi
+* MySQL 5.7 atau lebih tinggi
 
-## Contributing
+**Nilai Tambah**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Aplikasi ini dapat membantu mengelola pengeluaran dalam sebuah organisasi dengan lebih efektif dan efisien.
+* Aplikasi ini dapat membantu mengurangi kesalahan dalam pengelolaan pengeluaran.
 
-## Code of Conduct
+**Validasi Endpoint**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Aplikasi ini menggunakan Form Request Validation untuk memvalidasi input pengguna.
+* Aplikasi ini menggunakan Repository Pattern untuk memisahkan logika bisnis dari logika kontrol.
 
-## Security Vulnerabilities
+**Gunakan Form Request Validation**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Aplikasi ini menggunakan Form Request Validation untuk memvalidasi input pengguna.
+* Contoh:
+```php
+// app/Http/Requests/ExpenseRequest.php
 
-## License
+namespace App\Http\Requests;
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+use Illuminate\Foundation\Http\FormRequest;
+
+class ExpenseRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'amount' => 'required|numeric',
+            'description' => 'required|string',
+        ];
+    }
+}
+```
+
+**Menggunakan file class request terpisah**
+
+* Aplikasi ini menggunakan file class request terpisah untuk memisahkan logika validasi dari logika kontrol.
+* Contoh:
+```php
+// app/Http/Controllers/ExpenseController.php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ExpenseRequest;
+use App\Repositories\ExpenseRepository;
+
+class ExpenseController extends Controller
+{
+    /**
+     * Create a new expense.
+     *
+     * @param  \App\Http\Requests\ExpenseRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ExpenseRequest $request)
+    {
+        // ...
+    }
+}
+```
+
+**Controller**
+
+* Aplikasi ini menggunakan controller untuk mengatur logika kontrol.
+* Contoh:
+```php
+// app/Http/Controllers/ExpenseController.php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ExpenseRequest;
+use App\Repositories\ExpenseRepository;
+
+class ExpenseController extends Controller
+{
+    /**
+     * Create a new expense.
+     *
+     * @param  \App\Http\Requests\ExpenseRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ExpenseRequest $request)
+    {
+        // ...
+    }
+}
+```
+
+**Alur logika kode diletakkan diluar file class Controller**
+
+* Aplikasi ini menggunakan repository pattern untuk memisahkan logika bisnis dari logika kontrol.
+* Contoh:
+```php
+// app/Repositories/ExpenseRepository.php
+
+namespace App\Repositories;
+
+use App\Models\Expense;
+
+class ExpenseRepository
+{
+    /**
+     * Create a new expense.
+     *
+     * @param  array  $data
+     * @return \App\Models\Expense
+     */
+    public function create(array $data)
+    {
+        // ...
+    }
+}
+```
+
+**Menggunakan Repository Pattern**
+
+* Aplikasi ini menggunakan repository pattern untuk memisahkan logika bisnis dari logika kontrol.
+* Contoh:
+```php
+// app/Repositories/ExpenseRepository.php
+
+namespace App\Repositories;
+
+use App\Models\Expense;
+
+class ExpenseRepository
+{
+    /**
+     * Create a new expense.
+     *
+     * @param  array  $data
+     * @return \App\Models\Expense
+     */
+    public function create(array $data)
+    {
+        // ...
+    }
+}
+```
+
+**Dokumentasi**
+
+* Aplikasi ini menggunakan dokumentasi swagger untuk memudahkan penggunaan API.
+* Contoh:
+```php
+// routes/api.php
+
+Route::get('/expenses', 'ExpenseController@index')->name('expenses.index');
+```
+
+**Gunakan dokumentasi swagger**
+
+* Aplikasi ini menggunakan dokumentasi swagger untuk memudahkan penggunaan API.
+* Contoh:
+```php
+// routes/api.php
+
+Route::get('/expenses', 'ExpenseController@index')->name('expenses.index');
+```
+
+**Pastikan Swagger UI bisa diakses, dan bisa digunakan untuk mencoba endpoint.**
+
+* Aplikasi ini menggunakan dokumentasi swagger untuk memudahkan penggunaan API.
+* Anda bisa mengakses Swagger UI di `http://localhost:8000/api/docs`
+* Contoh:
+```php
+// routes/api.php
+
+Route::get('/expenses', 'ExpenseController@index')->name('expenses.index');
+```
+
+**Testing**
+
+* Aplikasi ini menggunakan PHPUnit untuk melakukan testing.
+* Aplikasi ini melakukan testing untuk setiap endpoint.
+* Contoh:
+```php
+// tests/Feature/ExpenseTest.php
+
+namespace Tests\Feature;
+
+use App\Models\Expense;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class ExpenseTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Test the index endpoint.
+     *
+     * @return void
+     */
+    public function testIndexEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the store endpoint.
+     *
+     * @return void
+     */
+    public function testStoreEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the show endpoint.
+     *
+     * @return void
+     */
+    public function testShowEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the update endpoint.
+     *
+     * @return void
+     */
+    public function testUpdateEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the destroy endpoint.
+     *
+     * @return void
+     */
+    public function testDestroyEndpoint()
+    {
+        // ...
+    }
+}
+```
+
+**Setiap endpoint di-test untuk memastikan bisa berjalan dengan baik.**
+
+* Aplikasi ini melakukan testing untuk setiap endpoint.
+* Aplikasi ini melakukan testing untuk setiap kondisi, mulai dari validasi input hingga alur didalamnya.
+* Contoh:
+```php
+// tests/Feature/ExpenseTest.php
+
+namespace Tests\Feature;
+
+use App\Models\Expense;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class ExpenseTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Test the index endpoint.
+     *
+     * @return void
+     */
+    public function testIndexEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the store endpoint.
+     *
+     * @return void
+     */
+    public function testStoreEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the show endpoint.
+     *
+     * @return void
+     */
+    public function testShowEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the update endpoint.
+     *
+     * @return void
+     */
+    public function testUpdateEndpoint()
+    {
+        // ...
+    }
+
+    /**
+     * Test the destroy endpoint.
+     *
+     * @return void
+     */
+    public function testDestroyEndpoint()
+    {
+        // ...
+    }
+}
+```
+
+**Tidak hanya test response code saja, tapi berbagai kondisi di-test. Mulai dari test validasinya, serta test alur didalamnya. Semakin lengkap semakin bagus.**
+
+**Readme**
+
+* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang aplikasi.
+* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara menginstal aplikasi.
+* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara menggunakan aplikasi.
+* Aplikasi ini menggunakan file README.md untuk memberikan informasi tentang cara melakukan testing
+
+**Lisensi**
+
+Aplikasi ini dirilis di bawah lisensi MIT. Anda bebas menggunakan, memodifikasi, dan mendistribusikan aplikasi ini sesuai dengan ketentuan lisensi.
+
+**Kontak**
+
+Jika Anda memiliki pertanyaan atau masalah dengan aplikasi ini, silakan hubungi kami di [alamat email Anda].
