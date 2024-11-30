@@ -1,55 +1,38 @@
 <?php
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Approver;
+use Tests\TestCase;
 
 class ApproverTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_create_approver()
+    public function test_approver_can_be_created()
     {
         $response = $this->postJson('/api/approvers', ['name' => 'Ana']);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
                  ->assertJson(['message' => 'Approver added successfully']);
 
         $this->assertDatabaseHas('approvers', ['name' => 'Ana']);
     }
 
-    public function test_cannot_create_duplicate_approver()
+    public function test_validation_fails_with_duplicate_name()
     {
-        Approver::create(['name' => 'Ana']);
-
+        $this->postJson('/api/approvers', ['name' => 'Ana']);
         $response = $this->postJson('/api/approvers', ['name' => 'Ana']);
 
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['name']);
     }
-    public function test_validation_error_when_name_is_missing()
+
+    public function test_validation_fails_with_empty_name()
     {
-        $response = $this->postJson('/api/approvers', []);
+        $response = $this->postJson('/api/approvers', ['name' => '']);
 
         $response->assertStatus(422)
-                 ->assertJsonStructure([
-                     'message',
-                     'errors' => [
-                         'name',
-                     ],
-                 ]);
-    }
-
-    public function test_validation_error_when_name_is_not_unique()
-    {
-        \App\Models\Approver::create(['name' => 'Ana']);
-
-        $response = $this->postJson('/api/approvers', ['name' => 'Ana']);
-
-        $response->assertStatus(422)
-                 ->assertJsonFragment([
-                     'name' => ['The name has already been taken.']
-                 ]);
+                 ->assertJsonValidationErrors(['name']);
     }
 }
+

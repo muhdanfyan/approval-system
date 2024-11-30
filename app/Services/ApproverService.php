@@ -2,18 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\Approver;
+use App\Repositories\ApproverRepository;
 
 class ApproverService
 {
-    /**
-     * Buat approver baru
-     * 
-     * @param array $data
-     * @return Approver
-     */
-    public function createApprover(array $data): Approver
+    protected $repository;
+
+    public function __construct(ApproverRepository $repository)
     {
-        return Approver::create($data);
+        $this->repository = $repository;
+    }
+
+    public function storeApprover(array $data)
+    {
+        return $this->repository->create($data);
     }
 }
+

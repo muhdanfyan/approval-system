@@ -11,17 +11,11 @@ class Approver extends Model
 
     protected $fillable = ['name'];
 
-    /**
-     * Relasi ke ApprovalStage
-     */
     public function approvalStages()
     {
         return $this->hasMany(ApprovalStage::class);
     }
 
-    /**
-     * Relasi ke Approval
-     */
     public function approvals()
     {
         return $this->hasMany(Approval::class);

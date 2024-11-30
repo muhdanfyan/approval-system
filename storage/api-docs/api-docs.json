@@ -200,14 +200,17 @@
                 "tags": [
                     "Approvers"
                 ],
-                "summary": "Add an approver",
-                "description": "Create a new approver",
-                "operationId": "f7610e168878d17521f6d508751f0ff0",
+                "summary": "Tambah approver baru",
+                "description": "Menambahkan approver baru ke sistem",
+                "operationId": "storeApprover",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "name"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
@@ -220,7 +223,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Approver added successfully",
                         "content": {
                             "application/json": {
@@ -244,18 +247,9 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "The given data was invalid."
+                                            "example": "Validation error"
                                         },
                                         "errors": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The name has already been taken."
-                                                    }
-                                                }
-                                            },
                                             "type": "object"
                                         }
                                     },

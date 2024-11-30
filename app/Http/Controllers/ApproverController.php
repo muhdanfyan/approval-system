@@ -2,62 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ApproverRequest;
+use App\Http\Requests\StoreApproverRequest;
 use App\Services\ApproverService;
-use OpenApi\Annotations as OA;
-
-/**
- * @OA\Post(
- *     path="/api/approvers",
- *     tags={"Approvers"},
- *     summary="Add an approver",
- *     description="Create a new approver",
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\JsonContent(
- *             @OA\Property(property="name", type="string", example="Ana")
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Approver added successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Approver added successfully")
- *         )
- *     ),
- *     @OA\Response(
- *         response=422,
- *         description="Validation Error",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="The given data was invalid."),
- *             @OA\Property(
- *                 property="errors",
- *                 type="object",
- *                 @OA\Property(
- *                     property="name",
- *                     type="array",
- *                     @OA\Items(type="string", example="The name has already been taken.")
- *                 )
- *             )
- *         )
- *     )
- * )
- */
-
-
 
 class ApproverController extends Controller
 {
-    protected $approverService;
+    protected $service;
 
-    public function __construct(ApproverService $approverService)
+    public function __construct(ApproverService $service)
     {
-        $this->approverService = $approverService;
+        $this->service = $service;
     }
 
-    public function store(ApproverRequest $request)
+    /**
+     * @OA\Post(
+     *     path="/api/approvers",
+     *     operationId="storeApprover",
+     *     tags={"Approvers"},
+     *     summary="Tambah approver baru",
+     *     description="Menambahkan approver baru ke sistem",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Ana")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Approver added successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Approver added successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation Error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Validation error"),
+     *             @OA\Property(property="errors", type="object")
+     *         )
+     *     )
+     * )
+     */
+
+    public function store(StoreApproverRequest $request)
     {
-        $this->approverService->createApprover($request->validated());
-        return response()->json(['message' => 'Approver added successfully'], 200);
+        $this->service->storeApprover($request->validated());
+        return response()->json(['message' => 'Approver added successfully'], 201);
     }
 }
